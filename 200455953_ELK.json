@@ -1,0 +1,451 @@
+{
+  "description": "",
+  "options": {
+    "auto_apply_filters": true,
+    "hide_panel_borders": false,
+    "hide_panel_titles": false,
+    "sync_colors": false,
+    "sync_cursor": true,
+    "sync_tooltips": false,
+    "use_margins": true
+  },
+  "tags": [],
+  "title": "200455953_ELK",
+  "filters": [],
+  "query": {
+    "expression": "",
+    "language": "kql"
+  },
+  "panels": [
+    {
+      "grid": {
+        "y": 0,
+        "x": 0,
+        "w": 22,
+        "h": 9
+      },
+      "config": {
+        "title": "Host Distribution",
+        "type": "pie",
+        "sampling": 1,
+        "ignore_global_filters": false,
+        "metrics": [
+          {
+            "operation": "count",
+            "empty_as_null": true
+          }
+        ],
+        "group_by": [
+          {
+            "operation": "terms",
+            "fields": [
+              "fromhost.keyword"
+            ],
+            "limit": 9,
+            "other_bucket": {
+              "include_documents_without_field": false
+            },
+            "rank_by": {
+              "type": "metric",
+              "metric_index": 0,
+              "direction": "desc"
+            },
+            "color": {
+              "mode": "gradient",
+              "palette": "default",
+              "mapping": [],
+              "sort": "desc",
+              "gradient": [
+                {
+                  "type": "from_palette",
+                  "palette": "default",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        ],
+        "data_source": {
+          "type": "data_view_reference",
+          "ref_id": "6a19f72d-92d2-4648-a8cf-a4c5d93ba378"
+        },
+        "legend": {
+          "visibility": "auto",
+          "nested": false
+        },
+        "styling": {
+          "labels": {
+            "visible": true,
+            "position": "outside"
+          },
+          "values": {
+            "visible": true,
+            "mode": "percentage"
+          }
+        }
+      },
+      "id": "d4f94394-9a74-4a67-aaa4-f5162fef08f2",
+      "type": "vis"
+    },
+    {
+      "grid": {
+        "y": 24,
+        "x": 1,
+        "w": 46,
+        "h": 12
+      },
+      "config": {
+        "ref_id": "89c85156-23e9-408f-850b-fd4f7092a692",
+        "selected_tab_id": "e5338fdd-70ca-45d8-af1d-0183a210e023",
+        "overrides": {
+          "column_settings": {
+            "fromhost": {
+              "width": 222
+            }
+          }
+        }
+      },
+      "id": "747e5d29-4e2d-4a42-a5dc-101fc0c93a86",
+      "type": "discover_session"
+    },
+    {
+      "grid": {
+        "y": 36,
+        "x": 0,
+        "w": 47,
+        "h": 14
+      },
+      "config": {
+        "ref_id": "e2c1b5a9-d0ce-46d8-9621-3e148b21c216",
+        "overrides": {}
+      },
+      "id": "f7139719-8f67-4d31-9c36-578a6b156a56",
+      "type": "discover_session"
+    },
+    {
+      "grid": {
+        "y": 0,
+        "x": 24,
+        "w": 22,
+        "h": 9
+      },
+      "config": {
+        "title": "SyslogTag",
+        "type": "pie",
+        "sampling": 1,
+        "ignore_global_filters": false,
+        "metrics": [
+          {
+            "operation": "count",
+            "empty_as_null": true
+          }
+        ],
+        "group_by": [
+          {
+            "operation": "terms",
+            "fields": [
+              "syslogtag.keyword"
+            ],
+            "limit": 9,
+            "other_bucket": {
+              "include_documents_without_field": false
+            },
+            "rank_by": {
+              "type": "metric",
+              "metric_index": 0,
+              "direction": "desc"
+            },
+            "color": {
+              "mode": "categorical",
+              "palette": "default",
+              "mapping": []
+            }
+          }
+        ],
+        "data_source": {
+          "type": "data_view_reference",
+          "ref_id": "6a19f72d-92d2-4648-a8cf-a4c5d93ba378"
+        },
+        "legend": {
+          "visibility": "visible",
+          "nested": false
+        },
+        "styling": {
+          "labels": {
+            "visible": true,
+            "position": "outside"
+          },
+          "values": {
+            "visible": true,
+            "mode": "percentage"
+          }
+        }
+      },
+      "id": "3a053e13-baa8-45c2-87a7-9d84cd020534",
+      "type": "vis"
+    },
+    {
+      "grid": {
+        "y": 9,
+        "x": 24,
+        "w": 24,
+        "h": 15
+      },
+      "config": {
+        "title": "Sudo commands",
+        "type": "xy",
+        "layers": [
+          {
+            "type": "bar",
+            "data_source": {
+              "type": "data_view_reference",
+              "ref_id": "6a19f72d-92d2-4648-a8cf-a4c5d93ba378"
+            },
+            "sampling": 1,
+            "ignore_global_filters": false,
+            "x": {
+              "operation": "date_histogram",
+              "field": "@timestamp",
+              "suggested_interval": "5m",
+              "use_original_time_range": false,
+              "include_empty_rows": true,
+              "drop_partial_intervals": false
+            },
+            "y": [
+              {
+                "operation": "count",
+                "empty_as_null": true
+              }
+            ],
+            "breakdown_by": {
+              "operation": "terms",
+              "fields": [
+                "fromhost.keyword"
+              ],
+              "limit": 9,
+              "other_bucket": {
+                "include_documents_without_field": false
+              },
+              "rank_by": {
+                "type": "metric",
+                "metric_index": 0,
+                "direction": "desc"
+              },
+              "aggregate_first": true,
+              "color": {
+                "mode": "categorical",
+                "palette": "default",
+                "mapping": []
+              }
+            }
+          }
+        ],
+        "axis": {
+          "x": {
+            "title": {
+              "visible": false
+            },
+            "ticks": {
+              "visible": true
+            },
+            "grid": {
+              "visible": true
+            },
+            "domain": {
+              "type": "fit",
+              "rounding": false
+            },
+            "labels": {
+              "orientation": "horizontal"
+            }
+          },
+          "y": {
+            "title": {
+              "visible": true
+            },
+            "scale": "linear",
+            "ticks": {
+              "visible": true
+            },
+            "grid": {
+              "visible": true
+            },
+            "domain": {
+              "type": "full",
+              "rounding": true
+            },
+            "labels": {
+              "orientation": "horizontal"
+            }
+          }
+        },
+        "styling": {
+          "overlays": {
+            "partial_buckets": {
+              "visible": false
+            },
+            "current_time_marker": {
+              "visible": false
+            }
+          },
+          "bars": {
+            "minimum_height": 1,
+            "data_labels": {
+              "visible": false
+            }
+          }
+        },
+        "legend": {
+          "placement": "outside",
+          "position": "bottom",
+          "layout": {
+            "type": "list"
+          },
+          "visibility": "visible"
+        },
+        "query": {
+          "expression": "syslogtag: \"sudo\" and message: \"*COMMAND=*\"",
+          "language": "kql"
+        }
+      },
+      "id": "206132fd-523c-43d7-849a-ec6cdbf483d6",
+      "type": "vis"
+    },
+    {
+      "grid": {
+        "y": 9,
+        "x": 0,
+        "w": 23,
+        "h": 14
+      },
+      "config": {
+        "title": "Authentication Failure Count",
+        "type": "xy",
+        "layers": [
+          {
+            "type": "bar_stacked",
+            "data_source": {
+              "type": "data_view_reference",
+              "ref_id": "6a19f72d-92d2-4648-a8cf-a4c5d93ba378"
+            },
+            "sampling": 1,
+            "ignore_global_filters": false,
+            "x": {
+              "operation": "date_histogram",
+              "field": "@timestamp",
+              "suggested_interval": "5m",
+              "use_original_time_range": false,
+              "include_empty_rows": true,
+              "drop_partial_intervals": false
+            },
+            "y": [
+              {
+                "operation": "count",
+                "empty_as_null": true,
+                "format": {
+                  "type": "number",
+                  "decimals": 2,
+                  "compact": false
+                }
+              }
+            ],
+            "breakdown_by": {
+              "operation": "terms",
+              "fields": [
+                "fromhost.keyword"
+              ],
+              "limit": 9,
+              "other_bucket": {
+                "include_documents_without_field": false
+              },
+              "rank_by": {
+                "type": "metric",
+                "metric_index": 0,
+                "direction": "desc"
+              },
+              "aggregate_first": true,
+              "color": {
+                "mode": "categorical",
+                "palette": "default",
+                "mapping": []
+              }
+            }
+          }
+        ],
+        "axis": {
+          "x": {
+            "title": {
+              "visible": true
+            },
+            "ticks": {
+              "visible": true
+            },
+            "grid": {
+              "visible": true
+            },
+            "domain": {
+              "type": "fit",
+              "rounding": false
+            },
+            "labels": {
+              "orientation": "horizontal"
+            }
+          },
+          "y": {
+            "title": {
+              "visible": true
+            },
+            "scale": "linear",
+            "ticks": {
+              "visible": true
+            },
+            "grid": {
+              "visible": true
+            },
+            "domain": {
+              "type": "full",
+              "rounding": true
+            },
+            "labels": {
+              "orientation": "horizontal"
+            }
+          }
+        },
+        "styling": {
+          "overlays": {
+            "partial_buckets": {
+              "visible": false
+            },
+            "current_time_marker": {
+              "visible": false
+            }
+          },
+          "bars": {
+            "minimum_height": 1,
+            "data_labels": {
+              "visible": false
+            }
+          }
+        },
+        "legend": {
+          "placement": "outside",
+          "position": "right",
+          "layout": {
+            "type": "grid",
+            "truncate": {
+              "max_lines": 1
+            }
+          },
+          "visibility": "visible"
+        },
+        "query": {
+          "expression": "message:(\"Failed password\" OR \"authentication failure\" OR \"Invalid user\" OR \"Failed Publickey\")\n",
+          "language": "kql"
+        }
+      },
+      "id": "844d5126-91e9-4bec-b0ca-93075ceed787",
+      "type": "vis"
+    }
+  ],
+  "pinned_panels": []
+}
