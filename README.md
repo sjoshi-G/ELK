@@ -1,32 +1,29 @@
-# ELK
+# ELK Security Monitoring Lab
 
-Welcome to my ELK Security Operations Center (SOC) Lab project!
-This lab shows how I used the ELK Stack (Elasticsearch, Logstash, Kibana) to collect, analyze, and visualize security logs from Linux systems. I built this project to learn how real SOC analysts monitor systems, detect suspicious activity, and investigate incidents.
+Security monitoring dashboards built with the ELK Stack (Elasticsearch, Logstash/Beats, Kibana), visualizing authentication failures, sudo activity, and system events to surface anomalies.
 
+## What it does
 
-This project demonstrates how security logs flow from computers (Linux) into a SIEM system (ELK), where they can be searched, visualized, and used to detect attacks.
+- **Authentication failures dashboard** — failed logins by user, source IP, and time; highlights brute-force patterns.
+- **Sudo activity dashboard** — privileged command usage across hosts.
+- **System events dashboard** — service changes, system anomalies, and event timelines.
 
-I set up:
-Filebeat to send Linux logs to ELK
-Kibana dashboards to visualize activity
-Simulated attacks like brute force
-Incident investigation reports based on real logs
+## Screenshots
 
-This is a complete beginner‑friendly SOC lab that shows how security monitoring works in real life.
+_(The 4 dashboard PNGs in this repo.)_
 
-Tools Used
-Elasticsearch – stores the logs
-Logstash – processes logs
-Kibana – dashboards and visualizations
-Filebeat – sends Linux logs to ELK
+## How to reproduce
 
-Ubuntu Linux VM
+1. Install Elasticsearch and Kibana (same version).
+2. Ship Linux auth/syslog data with Filebeat (sample config notes below).
+3. In Kibana: **Stack Management → Saved Objects → Import** and load `kibana-dashboards.json` from this repo.
+4. Generate activity (e.g., failed SSH logins) and watch the dashboards populate.
 
-Log sources
-
-Windows Logs: Failed login attempts
-Linux Logs : Sudo usage
-
-Dashboards included
-Authentication failure panels
-Linux Sudo activity
+```yaml
+# filebeat.yml (example input)
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/auth.log
+      - /var/log/syslog
